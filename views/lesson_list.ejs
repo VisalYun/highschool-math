@@ -1,0 +1,19 @@
+<%- include("header")-%>
+
+    <main>
+        <%- include("navigation_bar") %>
+        <section class="container">
+            <aside class="vertical-ads">ads</aside>
+            <section class="content">
+                <h2>លំហាត់សម្រាប់ថ្នាក់ទី <%= grade %></h2>
+                <section class="list lesson-list">
+                    <% for(var i=0; i < lessons.length; i++) { %>
+                        <a class="navigation-button" href="/lesson/<%= lessons[i].id %>"><%= lessons[i].title %></a>
+                    <% } %>
+                </section>
+            </section>
+            <aside class="vertical-ads">ads</aside>
+        </section>
+    </main>
+
+    <%- include("footer"); -%>

@@ -1,0 +1,14 @@
+<section class="header">
+    <header>
+        <h1>លំហាត់គណិតវិទ្យា</h1>
+        <!-- <div class="header-ads">Header Ads</div> -->
+    </header>
+    <nav>
+        <ul>
+            <% let khmerNumber=["៧", "៨" , "៩" , "១០" , "១១" , "១២" ] %>
+            <% for(var i=0; i < khmerNumber.length; i++) { %>
+                <li><a href="/grade/<%= i+7 %>">ថ្នាក់ទី <%= khmerNumber[i] %></a></li>
+            <% } %>
+        </ul>
+    </nav>
+</section>

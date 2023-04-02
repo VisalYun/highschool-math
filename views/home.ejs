@@ -1,0 +1,23 @@
+<%- include("header")-%>
+
+    <main>
+        <%- include("navigation_bar") %>
+            <section class="container">
+                <aside class="vertical-ads">ads</aside>
+                <section class="content">
+                    <h2>សូមស្វាគមន៍បងប្អូនទាំងអស់គ្នា</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At doloribus magnam est minima similique dicta sint architecto pariatur quisquam adipisci? Nulla, velit voluptatum? Animi ullam voluptatibus officia, excepturi ipsam consequuntur!
+                    Ratione quaerat, magnam dolores iusto doloremque aperiam dolor sequi consequuntur ad repellendus optio dolore saepe fugiat debitis earum velit quidem. Quisquam rem id voluptatibus iure voluptatem sed quia vero non!</p>
+                    <h3>លំហាត់សម្រាប់៖</h3>
+                    <div class="list grade-list">
+                        <% let khmerNumber=["៧", "៨" , "៩" , "១០" , "១១" , "១២" ] %>
+                        <% for(var i=0; i < khmerNumber.length; i++) { %>
+                            <a class="navigation-button" href="/grade/<%= i+7 %>">ថ្នាក់ទី <%= khmerNumber[i] %></a>
+                        <% } %>
+                    </div>
+                </section>
+                <aside class="vertical-ads">ads</aside>
+            </section>
+    </main>
+
+    <%- include("footer"); -%>
