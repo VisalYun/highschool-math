@@ -1,0 +1,37 @@
+<%- include("header")-%>
+
+<main>
+    <%- include("navigation_bar") %>
+    <section class="container">
+        <aside class="vertical-ads">ads</aside>
+        <section class="content">
+            <h2 class="left-align"><%= lesson.title %></h2>
+            <section class="list">
+                <% for(var i=0; i < lessonExercises.length; i++) { %>
+                    <div class="exercise-card">
+                        <p><%= lessonExercises[i].title %></p>
+                        <img src="<%= lessonExercises[i].expression %>" />
+                        <button id="show-<%= lessonExercises[i].id%>" class="primary-button" onclick="showAnswer(this.id)">Show Answer</button>
+                        <div id="answer-<%= lessonExercises[i].id%>" class="answers-tab">
+                            Answer is:
+                            <img src="/test.PNG"/>
+                        </div>
+                    </div>
+                <% } %>
+            </section>
+        </section>
+        <aside class="vertical-ads">ads</aside>
+    </section>
+</main>
+
+<script>
+    function showAnswer(id) {
+        document.getElementById(id).style.display = "none";
+
+        const temp = id.split("-");
+        const exerciseId = temp[1];
+        document.getElementById(`answer-${exerciseId}`).style.display = "flex";
+    }
+</script>
+
+<%- include("footer"); -%>
