@@ -1,7 +1,7 @@
 <%- include("header")-%>
 
     <main>
-        <%- include("navigation_bar") %>
+        <%- include("navigation_bar", {gradeList}) %>
             <section class="container">
                 <aside class="vertical-ads">ads</aside>
                 <section class="content">
@@ -10,9 +10,8 @@
                     Ratione quaerat, magnam dolores iusto doloremque aperiam dolor sequi consequuntur ad repellendus optio dolore saepe fugiat debitis earum velit quidem. Quisquam rem id voluptatibus iure voluptatem sed quia vero non!</p>
                     <h3>លំហាត់សម្រាប់៖</h3>
                     <div class="list grade-list">
-                        <% let khmerNumber=["៧", "៨" , "៩" , "១០" , "១១" , "១២" ] %>
-                        <% for(var i=0; i < khmerNumber.length; i++) { %>
-                            <a class="primary-button" href="/grade/<%= i+7 %>">ថ្នាក់ទី <%= khmerNumber[i] %></a>
+                        <% for(var i=0; i < gradeList.length; i++) { %>
+                            <a class="primary-button" href="/grade/<%= gradeList[i].grade_id %>"><%= gradeList[i].grade_name %></a>
                         <% } %>
                     </div>
                 </section>

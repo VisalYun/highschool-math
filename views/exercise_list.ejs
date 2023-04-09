@@ -1,24 +1,27 @@
 <%- include("header")-%>
 
 <main>
-    <%- include("navigation_bar") %>
     <section class="container">
         <aside class="vertical-ads">ads</aside>
         <section class="content">
-            <h2 class="left-align"><%= lesson.title %></h2>
-            <section class="list">
-                <% for(var i=0; i < lessonExercises.length; i++) { %>
-                    <div class="exercise-card">
-                        <p><%= lessonExercises[i].title %></p>
-                        <img src="<%= lessonExercises[i].expression %>" />
-                        <button id="show-<%= lessonExercises[i].id%>" class="primary-button" onclick="showAnswer(this.id)">Show Answer</button>
-                        <div id="answer-<%= lessonExercises[i].id%>" class="answers-tab">
-                            Answer is:
-                            <img src="/test.PNG"/>
+            <h2 class="left-align"><%= lesson.lesson_title %></h2>
+            <% if(lessonExercises.length > 0) { %>
+                <section class="list">
+                    <% for(var i=0; i < lessonExercises.length; i++) { %>
+                        <div class="exercise-card">
+                            <p><%= lessonExercises[i].exercise_title %></p>
+                            <img src="<%= lessonExercises[i].exercise_expression %>" />
+                            <button id="show-<%= lessonExercises[i].exercise_id%>" class="primary-button" onclick="showAnswer(this.id)">Show Answer</button>
+                            <div id="answer-<%= lessonExercises[i].exercise_id%>" class="answers-tab">
+                                Answer is:
+                                <img src="/<%= lessonExercises[i].exercise_answer %>"/>
+                            </div>
                         </div>
-                    </div>
-                <% } %>
-            </section>
+                    <% } %>
+                </section>
+            <% } else {%>
+                <p>សុំអធ្យាស្រ័យ! ពួកយើងមិនទាន់មានលំហាត់សម្រាប់មេរៀន<%= lesson.lesson_title %>ឡើយ។</p>
+            <% } %>
         </section>
         <aside class="vertical-ads">ads</aside>
     </section>

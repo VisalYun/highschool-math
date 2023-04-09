@@ -16,8 +16,8 @@ body {
 
 .header{
     background-color: white;
-    box-shadow: 1px 5px 5px #ccc;
     padding: 1rem 1rem 0.5rem 1rem;
+    box-shadow: 1px 5px 5px #ccc;
 }
 
 .header header {
@@ -38,30 +38,32 @@ body {
     height: 90px;
 }
 
-.header nav {
-    margin: 1rem 0;
+nav {
+    background-color: white;
+    box-shadow: 1px 5px 5px #ccc;
+    padding: 1rem 1rem 0.5rem 1rem;
 }
 
-.header nav ul {
+nav ul {
     list-style-type: none;
     display: flex;
 }
 
-.header nav ul li {
+nav ul li {
     margin-right: 2rem;
     cursor: pointer;
 }
 
-.header nav ul li a {
+nav ul li a {
     color: black;
     text-decoration: none;
 }
 
-.header nav ul li a.active {
+nav ul li a.active {
     color: var(--blue);
 }
 
-.header nav ul li a:hover {
+nav ul li a:hover {
     color: var(--blue);
 }
 

@@ -1,17 +1,19 @@
 <%- include("header")-%>
-<% let gradeMap = {7: "៧", 8: "៨", 9: "៩", 10: "១០", 11: "១១", 12: "១២"} %>
 
 <main>
-    <%- include("navigation_bar") %>
     <section class="container">
         <aside class="vertical-ads">ads</aside>
         <section class="content">
-            <h2 class="left-align">លំហាត់សម្រាប់ថ្នាក់ទី <%= gradeMap[grade] %></h2>
-            <section class="list lesson-list">
-                <% for(var i=0; i < lessons.length; i++) { %>
-                    <a class="primary-button" href="/lesson/<%= lessons[i].id %>"><%= lessons[i].title %></a>
-                <% } %>
-            </section>
+            <h2 class="left-align">មេរៀនសម្រាប់<%= grade.grade_name %></h2>
+            <% if(lessons.length > 0) { %>
+                <section class="list lesson-list">
+                    <% for(var i=0; i < lessons.length; i++) { %>
+                        <a class="primary-button" href="/lesson/<%= lessons[i].lesson_id %>"><%= lessons[i].lesson_title %></a>
+                    <% } %>
+                </section>
+            <% } else { %>
+                <p>សុំអធ្យាស្រ័យ! ពួកយើងមិនទាន់មានមេរៀនសម្រាប់<%= grade.grade_name %>ឡើយ។</p>
+            <% } %>
         </section>
         <aside class="vertical-ads">ads</aside>
     </section>

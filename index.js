@@ -6,88 +6,78 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-const lessons = [
-    {
-        id: 1,
-        title: "មេរៀនទី១"
-    },
-    {
-        id: 2,
-        title: "មេរៀនទី២"
-    },
-    {
-        id: 3,
-        title: "មេរៀនទី៣"
-    },
-    {
-        id: 4,
-        title: "មេរៀនទី៤"
-    },
-];
-
-const exercises = [
-    {
-        id: 1,
-        lessonId: 1,
-        title: "Please find X",
-        expression: "https://ichef.bbci.co.uk/images/ic/448xn/p0cyrps6.png",
-        answer: ""
-    },
-    {
-        id: 2,
-        lessonId: 1,
-        title: "Please find X",
-        expression: "https://eager2solve.com/wp-content/uploads/2021/12/algebra-math-problem-How-to-solve-the-quadratic-equation-1024x683.jpg",
-        answer: ""
-    },
-    {
-        id: 3,
-        lessonId: 2,
-        title: "Please find X",
-        expression: "https://ichef.bbci.co.uk/images/ic/448xn/p0cyrps6.png",
-        answer: ""
-    },
-    {
-        id: 4,
-        lessonId: 2,
-        title: "Please find X",
-        expression: "https://ichef.bbci.co.uk/images/ic/448xn/p0cyrps6.png",
-        answer: ""
-    },
-    {
-        id: 5,
-        lessonId: 3,
-        title: "Please find X",
-        expression: "https://ichef.bbci.co.uk/images/ic/448xn/p0cyrps6.png",
-        answer: ""
-    },
-    {
-        id: 6,
-        lessonId: 3,
-        title: "Please find X",
-        expression: "https://ichef.bbci.co.uk/images/ic/448xn/p0cyrps6.png",
-        answer: ""
-    }
-]
+const Grade = require("./models/grade");
+const Lesson = require("./models/lesson");
+const Exercise = require("./models/exercise");
 
 app.get("/", (req, res) => {
-    res.render("home");
+    Grade.getAllGrades((err, data) => {
+        if(err){
+            res.render("error");
+        }
+        else {
+            const gradeList = data;
+            res.render("home", {gradeList});
+        }
+    })
 });
 
 app.get("/grade/:id", (req, res) => {
     const grade = req.params.id;
-    res.render("lesson_list", {grade, lessons});
+    Grade.getGradeById(grade, (err, gradeData) => {
+        if(err){
+            if(err.type === "not_found"){
+                res.redirect("/")
+            }
+            else {
+                res.render("error");
+            }
+        }
+        else {
+            Lesson.getLessonByGrade(grade, (err, lessonsData) => {
+                if(err){
+                    if(err.type === "not_found"){
+                        res.render("lesson_list", {grade: gradeData, lessons: []});
+                    }
+                    else {
+                        res.render("error");
+                    }
+                }
+                else {
+                    res.render("lesson_list", {grade: gradeData, lessons: lessonsData});
+                }
+            });
+        }
+    });
 });
 
 app.get("/lesson/:id", (req, res) => {
     const lessonId = req.params.id;
-    const lesson = lessons.filter(l => l.id == lessonId);
-    if(lesson.length == 0){
-        res.render("home");
-    }
-
-    const lessonExercises = exercises.filter(e => e.lessonId == lessonId);
-    res.render("exercise_list", {lesson: lesson[0], lessonExercises})
+    Lesson.getLessonById(lessonId, (err, lessonData) => {
+        if(err){
+            if(err.type = "not_found"){
+                res.redirect("/")
+            }
+            else {
+                res.render("error");
+            }
+        }
+        else {
+            Exercise.getExerciseByLesson(lessonId, (err, exercisesData) => {
+                if(err){
+                    if(err.type = "not_found"){
+                        res.render("exercise_list", {lesson: lessonData, lessonExercises: []})
+                    }
+                    else {
+                        res.render("error");
+                    }
+                }
+                else {
+                    res.render("exercise_list", {lesson: lessonData, lessonExercises: exercisesData});
+                }
+            })
+        }
+    });
 });
 
 let port = process.env.PORT;
